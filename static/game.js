@@ -39,8 +39,7 @@ for (let i = 0; i < cells.length; i++) {
             prevCard = i;
         }
         if (click % 2 === 0) {
-            setTimeout(function(){ turnDown(i);}, 3000);
-            setTimeout(function(){ turnDown(prevCard);}, 3000);
+            setTimeout(function(){ turnDown(i); turnDown(prevCard);}, 3000);
         }
     });
 }
