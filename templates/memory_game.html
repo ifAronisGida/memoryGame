@@ -1,0 +1,16 @@
+{% extends 'layout.html' %}
+
+{% block head %}
+<script type="text/javascript" src="static/game.js" async></script>
+{% endblock %}
+
+{% block content %}
+
+<div class="row justify-content-center">
+    {% for i in range(card_number) %}
+    <div id="card" class="col-6 col-md-4 col-lg-2 border rounded text-center pt-5 pb-5 m-1 memCard fas fa-scroll fa-5x" id="memCard">
+    </div>
+    {% endfor %}
+</div>
+
+{% endblock %}
