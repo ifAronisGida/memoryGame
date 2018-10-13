@@ -31,6 +31,17 @@ function generateArray(cells) {
     return imagesArray;
 }
 
+function checkWin(cells) {
+    let score = 0;
+    for (let i = 0; i < cells.length; i++) {
+        let cell = cells[i];
+        if (!cell.classList.contains("fa-scroll")) {
+            score += 1;
+        }
+    }
+    if (score === cells.length) return true;
+    else return false;
+}
 
 let cells = document.getElementsByClassName('memCard');
 let imagesArray = shuffle(generateArray(cells));
@@ -48,7 +59,10 @@ for (let i = 0; i < cells.length; i++) {
             prevCard = i;
         }
         if (click % 2 === 0 && imagesArray[i] != imagesArray[prevCard]) {
-            setTimeout(function(){ turnDown(i); turnDown(prevCard);}, 750);
+            setTimeout(function(){ turnDown(i); turnDown(prevCard);}, 1000);
+        }
+        if (checkWin(cells)) {
+            alert("You win the game!");
         }
     });
 }
