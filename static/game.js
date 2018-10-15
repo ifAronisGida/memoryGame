@@ -12,7 +12,7 @@ function main() {
 
     function turnUp(i) {
         cells[i].classList.replace("fa-scroll", imagesArray[i]);
-        click += 1;
+        turnedCount += 1;
     }
 
     //turns up a card
@@ -58,7 +58,7 @@ function main() {
 
     let cells = document.getElementsByClassName('memCard');
     let imagesArray = shuffle(generateArray(cells));
-    let click = 0;
+    let turnedCount = 0;
     let prevCard;
     //sets gamestate
 
@@ -66,20 +66,35 @@ function main() {
         // we uses classic for loop to have the "indexes" of the elements
         let cell = cells[i];
         cell.addEventListener('click', function () {
-            console.log(click);
-            turnUp(i);
-            if (click % 2 === 1) {
+
+            if (turnedCount <= 1) {
+                turnUp(i);
+            }
+
+            if (turnedCount === 1) {
                 prevCard = i; //saves which card to turn down and compare with the next
             }
-            if (click % 2 === 0 && imagesArray[i] !== imagesArray[prevCard]) { //if the cards don't match they will turn down
-                setTimeout(function () { //waits 1 second before turning down cards
+
+            if (turnedCount === 2) {
+
+
+                if (imagesArray[i] !== imagesArray[prevCard]) {
+                    setTimeout(function () {
                     turnDown(i);
                     turnDown(prevCard);
-                }, 1000);
+                    }, 750);
+                }
+
+                setTimeout(function () {
+                    turnedCount = 0;
+                }, 750);
+
             }
+
             if (checkWin(cells)) { //checks if game is over
                 alert("You win the game!");
             }
+
         });
     }
 }
